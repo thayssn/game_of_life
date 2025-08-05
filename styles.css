@@ -51,3 +51,8 @@ button {
   width: 100%;
   text-transform: uppercase;
 }
+
+time {
+  position: fixed;
+  right: 2em;
+}

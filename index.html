@@ -6,6 +6,7 @@
   <body>
     <main>
       <canvas id="canvas"></canvas>
+      <time id="time">0:00</time>
       <rules id="rules">
         <rule>
           1. A live cell with fewer than
@@ -30,25 +31,21 @@
           live neighbors
         </rule>
         <rule>
-          <label>Update Rate</label>
-          <input
-            id="updateRate"
-            type="range"
-            min="100"
-            max="1000"
-            value="100"
-          /><span>100</span>ms
+          <label>FPS</label>
+          <input id="fps" type="range" min="1" max="60" value="30" /><span
+            >30</span
+          >fps
         </rule>
         <rule>
           <label>Duration</label>
           <input
             id="duration"
             type="range"
-            min="1000"
-            step="1000"
-            max="60000"
-            value="60000"
-          /><span>60000</span>ms
+            min="1"
+            step="1"
+            max="60"
+            value="10"
+          /><span>10</span>seconds
         </rule>
 
         <rule>
@@ -61,6 +58,13 @@
             max="1.0"
             value="0.7"
           /><span>0.7</span>
+        </rule>
+
+        <rule>
+          <label>Cell Size</label>
+          <input id="cellSize" type="range" min="3" max="20" value="5" /><span
+            >5</span
+          >
         </rule>
         <rule>
           <button id="restart">Restart</button>

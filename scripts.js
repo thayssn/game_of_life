@@ -1,18 +1,24 @@
+let fps,
+  duration,
+  populationSeed,
+  rule1,
+  rule2,
+  rule4,
+  cellSize,
+  rows,
+  cols,
+  animation;
 const canvas = document.getElementById("canvas");
 const restartBtn = document.getElementById("restart");
 const rules = document.getElementById("rules");
 const ctx = canvas.getContext("2d");
 const backgroundColor = "teal";
 const cellColor = "#57fcc5ff";
-const cellSize = 15;
+const timer = document.getElementById("time");
+
 const rulesHeight = rules.clientHeight;
-console.log(rulesHeight);
 const width = window.innerWidth;
 const height = window.innerHeight - rulesHeight;
-const cols = Math.floor(width / cellSize);
-const rows = Math.floor(height / cellSize);
-
-let updateRate, duration, populationSeed, rule1, rule2, rule4, interval;
 
 const getNeighbors = (index, cells) => {
   const neighborsIndexes = [
@@ -83,29 +89,52 @@ function seed() {
 
 function update(cells) {
   const updatedCells = updateCells(cells);
-  requestAnimationFrame(() => draw(updatedCells));
+  draw(updatedCells);
   return updatedCells;
 }
 
 function main() {
+  cancelAnimationFrame(animation);
+  animation = null;
   rule1 = Number(document.getElementById("rule1").value);
   rule2 = Number(document.getElementById("rule2").value);
   rule4 = Number(document.getElementById("rule4").value);
-  updateRate = Number(document.getElementById("updateRate").value);
-  duration = Number(document.getElementById("duration").value);
+  fps = Number(document.getElementById("fps").value);
+  duration = Number(document.getElementById("duration").value) * 1000;
   populationSeed = Number(document.getElementById("populationSeed").value);
+  cellSize = Number(document.getElementById("cellSize").value ?? 5);
+  cols = Math.floor(width / cellSize);
+  rows = Math.floor(height / cellSize);
 
   canvas.width = width;
   canvas.height = height;
-  clearInterval(interval);
-  let cells = seed();
-  interval = setInterval(() => {
-    cells = update(cells);
-  }, updateRate);
 
-  setTimeout(() => {
-    clearInterval(interval);
-  }, duration);
+  let cells = seed();
+  let start,
+    elapsed,
+    totalElapsed = 0,
+    lastFrame = Date.now();
+
+  const animate = (time) => {
+    if (!start) start = time;
+    totalElapsed = time - start;
+    elapsed = Date.now() - lastFrame;
+
+    if (elapsed > 1000 / fps) {
+      cells = update(cells);
+      lastFrame = Date.now();
+    }
+
+    timer.textContent = Math.floor(totalElapsed / 1000);
+
+    if (totalElapsed < duration) {
+      animation = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animation);
+    }
+  };
+
+  animation = requestAnimationFrame(animate);
 }
 
 main();
