@@ -1,0 +1,53 @@
+* {
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 1.1em;
+}
+
+body {
+  background-color: rgba(0, 29, 29, 0.9);
+  font-family: sans-serif;
+  color: white;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+canvas {
+  display: block;
+}
+
+rules {
+  position: fixed;
+  display: block;
+  padding: 1em 2em;
+  bottom: 0;
+  left: 0;
+}
+
+rule {
+  display: block;
+  margin-bottom: 2rem 0;
+  padding: 0.4em;
+}
+
+input {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+input + span {
+  font-weight: bold;
+}
+
+button {
+  background-color: #57fcc5ff;
+  padding: 0.4em 2.4em;
+  width: 100%;
+  text-transform: uppercase;
+}

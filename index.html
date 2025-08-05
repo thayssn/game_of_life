@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Game of Life</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <canvas id="canvas"></canvas>
+      <rules id="rules">
+        <rule>
+          1. A live cell with fewer than
+          <input id="rule1" type="range" value="2" min="1" max="10" /><span
+            >2</span
+          >
+          live neighbors dies of loneliness.
+        </rule>
+        <rule>
+          2. A live cell with up to
+          <input id="rule2" type="range" value="3" min="1" max="10" /><span
+            >3</span
+          >
+          live neighbors survives.
+        </rule>
+        <rule> 3. More than that and the cell dies of overpopulation. </rule>
+        <rule>
+          4. A cell is born with exactly
+          <input id="rule4" type="range" value="3" min="1" max="10" /><span
+            >3</span
+          >
+          live neighbors
+        </rule>
+        <rule>
+          <label>Update Rate</label>
+          <input
+            id="updateRate"
+            type="range"
+            min="100"
+            max="1000"
+            value="100"
+          /><span>100</span>ms
+        </rule>
+        <rule>
+          <label>Duration</label>
+          <input
+            id="duration"
+            type="range"
+            min="1000"
+            step="1000"
+            max="60000"
+            value="60000"
+          /><span>60000</span>ms
+        </rule>
+
+        <rule>
+          <label>Population Seed</label>
+          <input
+            id="populationSeed"
+            type="range"
+            min="0.1"
+            step="0.05"
+            max="1.0"
+            value="0.7"
+          /><span>0.7</span>
+        </rule>
+        <rule>
+          <button id="restart">Restart</button>
+        </rule>
+      </rules>
+    </main>
+    <script src="scripts.js"></script>
+  </body>
+</html>
