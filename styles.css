@@ -1,3 +1,9 @@
+:root {
+  --background: rgb(39, 34, 54);
+  --highlight: rgb(103, 87, 252);
+  --cell: rgb(87, 252, 156);
+}
+
 * {
   border: none;
   box-sizing: border-box;
@@ -7,9 +13,10 @@
 }
 
 body {
-  background-color: rgba(39, 34, 54, 0.9);
+  background-color: var(--background);
   font-family: sans-serif;
   color: white;
+  container: rules-container;
 }
 
 main {
@@ -31,6 +38,7 @@ rules {
 }
 
 rule {
+  font-size: 0.5em;
   display: block;
   margin-bottom: 2rem 0;
   padding: 0.4em;
@@ -46,7 +54,7 @@ input + span {
 }
 
 button {
-  background-color: rgb(103, 87, 252);
+  background-color: var(--highlight);
   padding: 0.4em 2.4em;
   width: 100%;
   text-transform: uppercase;
@@ -55,4 +63,31 @@ button {
 time {
   position: fixed;
   right: 2em;
+  font-size: 0.6em;
+  background-color: var(--background);
+  padding: 4px;
+  transform: translateY(-100%);
+  font-family: monospace;
+}
+
+footer {
+  width: 100%;
+  text-align: right;
+  font-family: monospace;
+  font-size: 0.6em;
+  padding: 10px;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--highlight);
+}
+
+@container (width > 960px) {
+  rule {
+    font-size: 2em;
+  }
 }

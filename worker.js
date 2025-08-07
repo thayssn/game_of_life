@@ -68,7 +68,6 @@ function draw(cells) {
 }
 
 function seed() {
-  console.log("seed", params.rows * params.cols);
   return Array.from({ length: params.rows * params.cols }, () =>
     Math.random() >= params.populationSeed ? 1 : 0
   );
@@ -88,23 +87,20 @@ function getAnimation() {
     elapsed,
     totalElapsed = 0,
     lastFrame = Date.now();
-  elapsedFrames = 0;
 
   const animate = (time) => {
     if (!start) start = time;
     totalElapsed = time - start;
     elapsed = Date.now() - lastFrame;
-    elapsedFrames++;
 
     if (elapsed > 1000 / params.fps) {
+      cells = update(cells);
+      lastFrame = Date.now();
       this.postMessage({
         timer: Math.floor(totalElapsed / 1000),
         fps: Math.max(1, Math.floor(1000 / elapsed)),
         type: "status",
       });
-      cells = update(cells);
-      elapsedFrames = 0;
-      lastFrame = Date.now();
     }
 
     animation = requestAnimationFrame(animate);
@@ -129,7 +125,6 @@ onmessage = (event) => {
   }
 
   if (event.data.type === "update") {
-    console.log("update", event.data.params);
     params = event.data.params;
   }
 };

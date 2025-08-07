@@ -3,6 +3,7 @@ const worker = new Worker("worker.js");
 const restartBtn = document.getElementById("restart");
 const rules = document.getElementById("rules");
 const timer = document.getElementById("time");
+let timeoutKeys = {};
 
 function main() {
   params = getParams();
@@ -27,7 +28,7 @@ function getParams() {
     rule4: getValueById("rule4"),
     fps: getValueById("fps"),
     populationSeed: getValueById("populationSeed"),
-    cellColor: "#57fcc5ff",
+    cellColor: "rgba(87, 252, 202, 1)",
     cellSize,
     cols: Math.floor(width / cellSize),
     rows: Math.floor(height / cellSize),
@@ -37,14 +38,17 @@ function getParams() {
 }
 
 document.querySelectorAll("input").forEach((input) => {
-  input.addEventListener("input", (x) => {
-    input.nextSibling.textContent = x.target.value;
+  input.addEventListener(
+    "input",
+    debounce("inputChange", (x) => {
+      input.nextSibling.textContent = x.target.value;
 
-    worker.postMessage({
-      params: getParams(),
-      type: "update",
-    });
-  });
+      worker.postMessage({
+        params: getParams(),
+        type: "update",
+      });
+    })
+  );
 });
 
 worker.postMessage({ canvas, type: "init" }, [canvas]);
@@ -52,7 +56,7 @@ main();
 
 restartBtn.addEventListener("click", main);
 
-window.addEventListener("resize", main);
+window.addEventListener("resize", debounce("resizeWindow", main, 100));
 
 worker.onmessage = (event) => {
   if (event.data.type === "status") {
@@ -63,3 +67,13 @@ worker.onmessage = (event) => {
     timer.textContent = "end";
   }
 };
+
+function debounce(key, fn, time = 200) {
+  return (...args) => {
+    clearTimeout(timeoutKeys[key]);
+    timeoutKeys[key] = null;
+    timeoutKeys[key] = setTimeout(() => {
+      fn(...args);
+    }, time);
+  };
+}
