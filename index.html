@@ -6,7 +6,7 @@
   <body>
     <main>
       <canvas id="canvas"></canvas>
-      <time id="time">0:00</time>
+      <time id="time">0</time>
       <rules id="rules">
         <rule>
           1. A live cell with fewer than
@@ -37,18 +37,6 @@
           >fps
         </rule>
         <rule>
-          <label>Duration</label>
-          <input
-            id="duration"
-            type="range"
-            min="1"
-            step="1"
-            max="60"
-            value="10"
-          /><span>10</span>seconds
-        </rule>
-
-        <rule>
           <label>Population Seed</label>
           <input
             id="populationSeed"
@@ -59,7 +47,6 @@
             value="0.7"
           /><span>0.7</span>
         </rule>
-
         <rule>
           <label>Cell Size</label>
           <input id="cellSize" type="range" min="3" max="20" value="5" /><span

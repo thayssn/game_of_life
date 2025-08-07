@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: rgba(0, 29, 29, 0.9);
+  background-color: rgba(39, 34, 54, 0.9);
   font-family: sans-serif;
   color: white;
 }
@@ -46,7 +46,7 @@ input + span {
 }
 
 button {
-  background-color: #57fcc5ff;
+  background-color: rgb(103, 87, 252);
   padding: 0.4em 2.4em;
   width: 100%;
   text-transform: uppercase;
