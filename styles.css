@@ -16,7 +16,7 @@ body {
   background-color: var(--background);
   font-family: sans-serif;
   color: white;
-  container: rules-container;
+  container-type: inline-size;
 }
 
 main {
@@ -88,6 +88,6 @@ a:hover {
 
 @container (width > 960px) {
   rule {
-    font-size: 2em;
+    font-size: 1em;
   }
 }
