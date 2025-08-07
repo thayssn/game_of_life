@@ -9,7 +9,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 1.1em;
+  font-size: 16px;
 }
 
 body {
@@ -29,19 +29,26 @@ canvas {
   display: block;
 }
 
-rules {
+wrapper {
   position: fixed;
-  display: block;
-  padding: 1em 2em;
   bottom: 0;
   left: 0;
+  width: 100%;
+}
+
+rules {
+  padding: 1em 2em;
+  display: block;
+  columns: 300px;
+  column-gap: 2em;
 }
 
 rule {
-  font-size: 0.5em;
+  font-size: 1.1em;
   display: block;
   margin-bottom: 2rem 0;
   padding: 0.4em;
+  break-inside: avoid-column;
 }
 
 input {
@@ -51,13 +58,15 @@ input {
 
 input + span {
   font-weight: bold;
+  color: var(--cell);
 }
 
 button {
   background-color: var(--highlight);
-  padding: 0.4em 2.4em;
+  padding: 0.6em 2.4em;
   width: 100%;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 time {
@@ -74,7 +83,7 @@ footer {
   width: 100%;
   text-align: right;
   font-family: monospace;
-  font-size: 0.6em;
+  font-size: 0.5em;
   padding: 10px;
 }
 
@@ -86,8 +95,8 @@ a:hover {
   color: var(--highlight);
 }
 
-@container (width > 960px) {
-  rule {
-    font-size: 1em;
+@container (width > 1080px) {
+  rules {
+    max-height: 200px;
   }
 }
